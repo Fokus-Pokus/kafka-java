@@ -1,0 +1,31 @@
+app:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    security:
+      protocol: SASL_SSL
+      sasl-mechanism: PLAIN
+      truststore-location: ${KAFKA_TRUSTSTORE_PATH:}
+      truststore-password: ${KAFKA_TRUSTSTORE_PASSWORD:}
+      truststore-type: JKS
+
+    user:
+      username: ${KAFKA_USERNAME:user1}
+      password: ${KAFKA_PASSWORD:change-me}
+      group-id: ${KAFKA_GROUP_ID:group-user1}
+
+    routes:
+      route1:
+        input-topic: ${KAFKA_TOPIC_1:topic-1}
+        output-topic: ${KAFKA_TOPIC_2:topic-2}
+        max-messages-per-second: ${KAFKA_ROUTE1_MAX_MESSAGES_PER_SECOND:0}
+      route3:
+        input-topic: ${KAFKA_TOPIC_3:topic-3}
+        output-topic: ${KAFKA_TOPIC_4:topic-4}
+        max-messages-per-second: ${KAFKA_ROUTE3_MAX_MESSAGES_PER_SECOND:0}
+
+  mapping:
+    key-path: ${KAFKA_KEY_PATH:messageId}
+    fields:
+      requestId: messageId
+      userId: payload.user.id
+      eventType: payload.eventType
