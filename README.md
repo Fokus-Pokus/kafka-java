@@ -5,6 +5,7 @@
 ## Что делает
 - Подключается к Kafka.
 - Читает сообщения из `app.kafka.input-topic`.
+- Позволяет ограничить скорость вычитки через `app.kafka.max-messages-per-second` (сообщений/сек).
 - Маппит поля по конфигу `app.mapping.fields`.
 - При необходимости извлекает ключ из `app.mapping.key-path`.
 - Отправляет результат в `app.kafka.output-topic`.
@@ -63,3 +64,10 @@ mvn spring-boot:run
 mvn clean package
 java -jar target/kafka-relay-service-0.0.1-SNAPSHOT.jar
 ```
+
+
+## Ограничение скорости вычитки
+- `app.kafka.max-messages-per-second: 0` — без ограничений (по умолчанию).
+- `app.kafka.max-messages-per-second: 10` — не более 10 сообщений в секунду на инстанс сервиса.
+
+Переменная окружения: `KAFKA_MAX_MESSAGES_PER_SECOND`.

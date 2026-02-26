@@ -21,6 +21,7 @@ app:
   kafka:
     input-topic: ${KAFKA_INPUT_TOPIC:input-topic}
     output-topic: ${KAFKA_OUTPUT_TOPIC:output-topic}
+    max-messages-per-second: ${KAFKA_MAX_MESSAGES_PER_SECOND:0}
   mapping:
     key-path: ${KAFKA_KEY_PATH:messageId}
     fields:
